@@ -13,7 +13,7 @@
  * at runtime. Keeping the import list to builtins makes that failure impossible
  * rather than merely unlikely.
  *
- * See docs/decisions/0001-runtime-i-stack.md.
+ * See docs/decisions/0001-runtime-and-stack.md.
  */
 
 import { readFileSync } from "node:fs";

@@ -1,7 +1,7 @@
 # git-identity
 
 Claude Code plugin binding a project to a GitHub account and git identity.
-Rationale and measurements: `docs/decisions/0001-runtime-i-stack.md`.
+Rationale and measurements: `docs/decisions/0001-runtime-and-stack.md`.
 
 ## Layout
 

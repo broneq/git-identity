@@ -126,7 +126,7 @@ claude --plugin-dir ~/projects/git-identity
 ```
 
 Design decisions, with the measurements behind them, are in
-[`docs/decisions/0001-runtime-i-stack.md`](docs/decisions/0001-runtime-i-stack.md).
+[`docs/decisions/0001-runtime-and-stack.md`](docs/decisions/0001-runtime-and-stack.md).
 
 ## License
 
