@@ -1,6 +1,6 @@
 {
   "name": "@broneq/git-identity",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Per-project GitHub account and git identity profiles for Claude Code",
   "private": true,
   "type": "module",
