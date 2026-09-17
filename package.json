@@ -1,0 +1,24 @@
+{
+  "name": "@broneq/git-identity",
+  "version": "0.1.0",
+  "description": "Per-project GitHub account and git identity profiles for Claude Code",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "check": "biome ci .",
+    "format": "biome format --write .",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test hooks/*.test.mjs",
+    "verify": "pnpm run check && pnpm run typecheck && pnpm run test"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.14",
+    "@types/node": "^22.20.3",
+    "typescript": "^7.0.2"
+  }
+}

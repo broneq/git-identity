@@ -1,0 +1,10 @@
+{
+  "name": "git-identity",
+  "description": "Bind a project to a GitHub account and a git commit identity. Every gh call and every commit in it then uses the right one - carried by the environment, not by a prompt a subagent can miss.",
+  "version": "0.1.0",
+  "author": {
+    "name": "broneq"
+  },
+  "repository": "https://github.com/broneq/git-identity",
+  "license": "MIT"
+}
