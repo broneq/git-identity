@@ -250,6 +250,30 @@ build happens on CI and not at install time.
   wrapper in the style of Superpowers, which looks for Git Bash on Windows and
   exits quietly when it cannot find one.
 
+## Amendment 1 (2026-09-25): bdk moves to a Node / TypeScript kernel
+
+bdk v3 replaces its Python scripts with a kernel written in TypeScript and
+shipped as one esbuild bundle, `dist/bdk.mjs`, committed and checked by
+`git diff --exit-code` on CI (bdk
+`docs/adr/0002-kernel-runtime-node-typescript.md`). Three statements above
+change:
+
+- **"bdk stays in Python" no longer holds.** The ecosystem has one language.
+  The condition "the helpers are to be consumed by bdk" in "What would
+  invalidate this" becomes possible: nothing in bdk blocks consuming shared
+  helpers any more, and doing so would confirm this ADR, not overturn it.
+- **Rule 9 is reinterpreted for plugins whose core is a state machine.** bdk's
+  core functionality is a state machine over committed files with refusals the
+  model cannot argue with; that logic cannot live in `SKILL.md`. Such a plugin
+  has a runtime by definition, and the kernel follows rules 1, 7 and 8: nothing
+  imported outside `node:` at run time, runtime dependencies bundled on CI,
+  TypeScript as the source because the bundling step exists. Rule 9 keeps its
+  meaning for everything else: logic that can be a skill stays a skill.
+- **Rule 2 does not apply to guard hooks of such a plugin.** bdk's guard hooks
+  fail closed: when the kernel or Node is missing, the guarded action is blocked
+  and the reason is shown, because a silent success would let the model skip a
+  gate. Rule 2 still holds for bonus hooks, whose loss costs a line of a report.
+
 ---
 
 ## Rules for Claude Code plugins
@@ -267,6 +291,8 @@ above.
    `hooks.json` is guarded by the pattern
    `command -v <runtime> >/dev/null 2>&1 && <runtime> ... || true`. A missing
    bonus feature never breaks someone else's session.
+   Exception: a guard hook whose job is to block an action fails closed (see
+   Amendment 1).
 3. **No `npx` in hooks.** 0.4 s on a good network, 70 seconds of hanging without
    one, on every session start.
 4. **A hook reads `cwd` from the payload on stdin**, not from `process.cwd()`.
@@ -292,6 +318,8 @@ above.
 9. **The core functionality has no runtime.** Logic that operates on
    configuration files belongs in `SKILL.md`, not in a script. The pattern: the
    built-in `update-config`.
+   Exception: a core that is a state machine over files with enforced refusals
+   ships as a bundled runtime under rules 1, 7 and 8 (see Amendment 1).
 10. **A skill that modifies someone else's file reads it whole and shows a diff
     before writing.** This replaces the unit test that does not exist at this
     layer.
