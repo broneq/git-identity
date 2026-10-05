@@ -5,6 +5,7 @@
       "**/*.mjs",
       "**/*.json",
       "!**/node_modules",
+      "!.github/.release-please-manifest.json",
       "!.lavish",
       "!.bdk",
       "!.code-review-graph"
